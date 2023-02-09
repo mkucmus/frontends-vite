@@ -25,11 +25,6 @@ apiInstance.onConfigChange(({ config }) => {
       sameSite: "Lax",
       path: "/",
     });
-    Cookies.set("sw-language-id", config.languageId || "", {
-      expires: 365,
-      sameSite: "Lax",
-      path: "/",
-    });
 
     contextToken.value = config.contextToken;
   } catch (e) {

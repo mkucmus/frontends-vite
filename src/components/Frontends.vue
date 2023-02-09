@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { reactive } from "vue";
 import {
   useSessionContext,
   useCheckout,
@@ -9,7 +10,13 @@ defineProps<{
 }>();
 const { currency } = useSessionContext();
 const { selectedPaymentMethod } = useCheckout();
-const { isLoggedIn } = useUser();
+const { isLoggedIn, login } = useUser();
+const credentials = reactive({
+  username: "",
+  password: "",
+});
+
+const invokeLogin = () => login(credentials); 
 </script>
 
 <template>
@@ -26,6 +33,11 @@ const { isLoggedIn } = useUser();
     </p>
     <p>
       Is customer logged in: <strong>{{ isLoggedIn }}</strong>
+      <div>
+        <input type="text" v-model="credentials.username" />
+        <input type="password" v-model="credentials.password" />
+        <button @click="invokeLogin">Login</button>
+      </div>
     </p>
   </div>
 </template>
